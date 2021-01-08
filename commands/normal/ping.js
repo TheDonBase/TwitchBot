@@ -7,8 +7,8 @@ class Ping extends Command {
         this.description = "Displays the bots ping.";
     }
 
-    async execute(message, author, ...params) {
-        this.say(channel, `@${tags.username}, Yo what's up`);
+    async execute(message, channel, tags, ...params) {
+        this.client.say(channel, `@${tags.username}, Yo what's up`);
     }
 }
 
