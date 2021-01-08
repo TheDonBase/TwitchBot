@@ -62,7 +62,7 @@ class TwitchBot {
         }
         this.#commands = all_commands;
         Command.commands = all_commands;
-        Logger("info", `Amount of commands: ${all_commands.length}`)
+        Logger("info", `Amount of commands: ${all_commands.all.length}`)
     }
     _on_connected() {
         this.#client.on('ready', () => {
