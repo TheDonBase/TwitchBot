@@ -17,13 +17,8 @@ class TwitchBot {
     }
     run(startup_settings = { commands: true }) {
         this.#debug = process.env.DEBUG;
-        this.#client = new tmi.Client();
-        if (this.#debug) {
-            this._on_connected();
-        }
-        this._on_message();
         try {
-            this.#client({
+            this.#client = new tmi.Client({
                 options: { debug: true },
                 connection: {
                     secure: true,
@@ -39,6 +34,10 @@ class TwitchBot {
         } catch (e) {
             console.error(e.message);
         }
+        if (this.#debug) {
+            this._on_connected();
+        }
+        this._on_message();
         this._generate_commands();
     }
 
@@ -71,7 +70,7 @@ class TwitchBot {
         });
     }
     _on_message() {
-        this.#client.on('message', async (message) => {
+        this.#client.on('message', async (channel, tags, message, self) => {
             if (self) return;
             const args = shlex.split(message.content.slice(this.#prefix.length).trim());
             const command = args.shift().toLowerCase();

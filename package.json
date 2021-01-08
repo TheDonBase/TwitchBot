@@ -1,7 +1,7 @@
 {
   "name": "TwitchBot",
   "version": "1.0.0",
-  "description": "",
+  "description": "Twitch Bot",
   "main": "index.js",
   "dependencies": {
     "dotenv": "^8.2.0",

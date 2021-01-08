@@ -2,11 +2,11 @@ function Logger(messageType, message) {
     let timestamp = new Date().toUTCString()
     if(messageType === "info")
     {
-        console.log(`[${timestamp}] Info: ` + message);
+        console.log(`[${timestamp} Info] ` + message);
     } else if (messageType === "error") {
-        console.log(`[${timestamp}] Error: ` + message);
+        console.log(`[${timestamp} Error] ` + message);
     } else if (messageType === "debug") {
-        console.log(`[${timestamp}] Debug: ` + message);;
+        console.log(`[${timestamp} Debug] ` + message);;
     }
 }
 
