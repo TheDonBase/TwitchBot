@@ -10,8 +10,8 @@ class clearChat extends Command {
 
     async execute(message, user, channel, tags, ...params) {
         if (user.mod || user['user-type'] === 'mod') {
-            await this.client.clear(`${process.env.CHANNEL}`);
-            await this.client.say('Cleared the chat!');
+            await this.client.clear(channel);
+            await this.client.say(channel, 'Cleared the chat!');
         }
         else {
             return;
