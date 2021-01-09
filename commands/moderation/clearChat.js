@@ -1,6 +1,6 @@
 const Command = require("../../framework/core/Command");
 
-class Ping extends Command {
+class clearChat extends Command {
     constructor() {
         super();
         this.name = 'clear';
@@ -8,9 +8,9 @@ class Ping extends Command {
         this.description = "Clears the chat.";
     }
 
-    async execute(message,user, channel, tags, ...params) {
-        if(user.mod || user['user-type'] === 'mod') {
-            this.client.say('/clear');
+    async execute(message, user, channel, tags, ...params) {
+        if (user.mod || user['user-type'] === 'mod') {
+            await this.client.say('/clear');
         }
         else {
             return;
@@ -18,4 +18,4 @@ class Ping extends Command {
     }
 }
 
-module.exports = Ping;
+module.exports = clearChat;
