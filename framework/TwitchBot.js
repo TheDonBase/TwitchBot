@@ -70,7 +70,7 @@ class TwitchBot {
         });
     }
     _on_message() {
-        this.#client.on('message', async (channel, tags, message, self) => {
+        this.#client.on('message', async (channel, user ,tags, message, self) => {
             if (self) return;
             const args = shlex.split(message.slice(this.#prefix.length).trim());
             const command = args.shift().toLowerCase();
@@ -84,7 +84,7 @@ class TwitchBot {
             }
             if (found_command === null) return false;
             Logger("info", `Received command [${command}] with params: ${JSON.stringify(args)}`);
-            await found_command.execute(message, channel, tags, ...args);
+            await found_command.execute(message, user, channel, tags, ...args);
         });
     }
 }

@@ -1,7 +1,6 @@
 function Logger(messageType, message) {
     let timestamp = new Date().toUTCString()
-    if(messageType === "info")
-    {
+    if (messageType === "info") {
         console.log(`[${timestamp} Info] ` + message);
     } else if (messageType === "error") {
         console.log(`[${timestamp} Error] ` + message);
