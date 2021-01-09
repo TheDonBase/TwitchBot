@@ -70,21 +70,25 @@ class TwitchBot {
         });
     }
     _on_message() {
-        this.#client.on('message', async (channel, user ,tags, message, self) => {
-            if (self) return;
-            const args = shlex.split(message.slice(this.#prefix.length).trim());
-            const command = args.shift().toLowerCase();
-            let found_command = null;
-            for (let [name, c] of Object.entries(this.#commands)) {
-                if (name === 'all') continue;
-                if (c.name === command || (c.aliases !== undefined && c.aliases.includes(command))) {
-                    found_command = c;
-                    break;
+        this.#client.on('message', async (channel, user, tags, message, self) => {
+            try {
+                if (self) return;
+                const args = shlex.split(message.slice(this.#prefix.length).trim());
+                const command = args.shift().toLowerCase();
+                let found_command = null;
+                for (let [name, c] of Object.entries(this.#commands)) {
+                    if (name === 'all') continue;
+                    if (c.name === command || (c.aliases !== undefined && c.aliases.includes(command))) {
+                        found_command = c;
+                        break;
+                    }
                 }
+                if (found_command === null) return false;
+                Logger("info", `Received command [${command}] with params: ${JSON.stringify(args)}`);
+                await found_command.execute(message, user, channel, tags, ...args);
+            } catch (e) {
+                console.log(e.message);
             }
-            if (found_command === null) return false;
-            Logger("info", `Received command [${command}] with params: ${JSON.stringify(args)}`);
-            await found_command.execute(message, user, channel, tags, ...args);
         });
     }
 }
