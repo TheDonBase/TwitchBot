@@ -13,13 +13,6 @@ const LOG_TYPES_READABLE = {
 function Logger({log_type=LOG_TYPES.INFO, message=new DOMException('Missing required message parameter in Logger method')} = {}) {
     let timestamp = new Date().toUTCString()
     console.log(`[${timestamp} ${LOG_TYPES_READABLE[log_type]}] ${message}`);
-    // if (messageType === "info") {
-    //     console.log(`[${timestamp} Info] ${message}`);
-    // } else if (messageType === "error") {
-    //     console.log(`[${timestamp} Error] ${message}`);
-    // } else if (messageType === "debug") {
-    //     console.log(`[${timestamp} Debug] ${message}`);
-    // }
 }
 
 
