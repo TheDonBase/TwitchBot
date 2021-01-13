@@ -8,14 +8,9 @@ class clearChat extends Command {
         this.description = "Clears the chat.";
     }
 
-    async execute(message, user, channel, tags, ...params) {
-        if (user.mod || user['user-type'] === 'mod') {
-            await this.client.clear(channel);
-            await this.client.say(channel, 'Cleared the chat!');
-        }
-        else {
-            return;
-        }
+    async execute(message, channel, author, ...params) {
+        await this.client.clear(channel);
+        await this.client.say(channel, 'Cleared the chat!');
     }
 }
 
