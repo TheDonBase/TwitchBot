@@ -85,7 +85,11 @@ class TwitchBot {
                 }
                 if (found_command === null) return false;
                 Logger({log_type: LOG_TYPES.INFO, message: `Received command [${command}] with params: ${JSON.stringify(args)}`} );
-                await found_command.execute(message, user, channel, tags, ...args);
+
+                if (found_command.isModCmd && !(user.mod || user['user-type'] === 'mod' || user.badges.hasOwnProperty('broadcaster')))
+                    return false;
+
+                await found_command.execute(message, channel, user, ...args);
             } catch (e) {
                 console.log(e.message);
             }
