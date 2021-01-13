@@ -70,7 +70,7 @@ class TwitchBot {
         });
     }
     _on_message() {
-        this.#client.on('message', async (channel, user, tags, message, self) => {
+        this.#client.on('message', async (channel, user, message, self) => {
             try {
                 if (self) return;
                 const args = shlex.split(message.slice(this.#prefix.length).trim());
