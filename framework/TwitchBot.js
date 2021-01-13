@@ -3,7 +3,7 @@ const glob = require('glob');
 const path = require('path');
 const shlex = require('shlex');
 const Command = require('./core/Command');
-const Logger = require('./logging/Logger')
+const {Logger, LOG_TYPES} = require('./logging/Logger')
 
 class TwitchBot {
     #client = null;
@@ -62,11 +62,11 @@ class TwitchBot {
         }
         this.#commands = all_commands;
         Command.commands = all_commands;
-        Logger("info", `Amount of commands: ${all_commands.all.length}`)
+        Logger({log_type: LOG_TYPES.INFO, message: `Amount of commands: ${all_commands.all.length}`});
     }
     _on_connected() {
         this.#client.on('ready', () => {
-            Logger("info", `Successfully logged in as ${this.#client.username}`);
+            Logger({log_type: LOG_TYPES.INFO, message: `Successfully logged in as ${this.#client.username}`});
         });
     }
     _on_message() {
@@ -84,7 +84,7 @@ class TwitchBot {
                     }
                 }
                 if (found_command === null) return false;
-                Logger("info", `Received command [${command}] with params: ${JSON.stringify(args)}`);
+                Logger({log_type: LOG_TYPES.INFO, message: `Received command [${command}] with params: ${JSON.stringify(args)}`} );
                 await found_command.execute(message, user, channel, tags, ...args);
             } catch (e) {
                 console.log(e.message);
