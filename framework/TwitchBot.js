@@ -19,7 +19,7 @@ class TwitchBot {
         this.#debug = process.env.DEBUG;
         try {
             this.#client = new tmi.Client({
-                options: { debug: true },
+                options: { debug: process.env.DEBUG },
                 connection: {
                     secure: true,
                     reconnect: true
